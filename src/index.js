@@ -40,17 +40,18 @@ app.use(session({
     }),
     saveUninitialized: true
 }))
+
 app.use(cookieParser("claveSecreta"))
 app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
 app.set('views', __dirname + '/views')
 
-//Passport
 initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
 
 //Routes
+
 app.use('/', indexRouter)
 
 //Routes Cookies
@@ -86,6 +87,8 @@ app.post('/login', (req, res) => {
     if (email == "admin@admin.com" && password == "1234") {
         req.session.email = email
         req.session.password = password
+
+
     }
     console.log(req.session)
     res.send("Login")
